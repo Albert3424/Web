@@ -64,6 +64,12 @@
         box-shadow: inset 0px 0px 3px 3px #77A1F5;
     }
 
+    .control_button:active
+    {
+        background-image: linear-gradient(to bottom right, #55A1CF, #0025B5);
+        box-shadow: inset 0px 0px 3px 3px #5781F5;
+    }
+
     .control_button:disabled, .control_button:disabled:hover
     {
         color: lightgray;
@@ -80,6 +86,12 @@
     {
         background-image: linear-gradient(to bottom right, #D98485,#FF3020);
         box-shadow: inset 0px 0px 3px 3px #C49A9B;
+    }
+
+    #close_button:active
+    {
+        background-image: linear-gradient(to bottom right, #D95455,#FF3020);
+        box-shadow: inset 0px 0px 3px 3px #B48A8B;
     }
 
 
@@ -118,3 +130,114 @@
     background-color: darkblue;
     background-image: linear-gradient(to right, #001177CC, #0055BBFF,#001177CC)
 }
+
+#work-area
+{
+    width: 95%;
+    display: block;
+}
+
+.menu-bar, .display, .buttons
+{
+    width: 100%;
+}
+
+.display
+{
+    display: flex;
+    justify-content: center;
+}
+
+.menu-bar
+{
+    display: flex;
+    justify-content: left;
+}
+
+    .menu-bar > button
+    {
+        width: 50px;
+        height: 22px;
+        margin: 1px;
+        background: rgb(236,233,216);
+        border: none;
+    }
+
+        .menu-bar > button:hover
+        {
+            box-shadow: 1px 1px 0 0 grey;
+            background: rgb(246,243,226);
+        }
+
+        .menu-bar > button:active
+        {
+            box-shadow: inset 1px 1px 0 0 grey;
+            background: rgb(226,223,206);
+        }
+
+#text
+{
+    width: 93%;
+}
+
+input[type=text]
+{
+    text-align: right;
+}
+
+.buttons
+{
+    display: flex;
+    justify-content: left;
+}
+
+    .buttons button
+    {
+        width: 50px;
+        height: 40px;
+        margin: 5px 10px;
+    }
+
+.memory-buttons
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    .memory-buttons > button
+    {
+        color: red;
+    }
+
+    .memory-buttons > #square
+    {
+        width: 32px;
+        height: 32px;
+        border: inset 2px;
+        margin: 7px 10px;
+    }
+
+.main-block button
+{
+    margin: 5px;
+}
+
+.wide-buttons > button
+{
+    width: 85px;
+    color: red;
+}
+
+.digit-buttons
+{
+    display: grid;
+    grid-template-columns: 50px 50px 50px;
+    grid-template-rows: 40px 40px 40px 40px;
+    grid-gap: 10px;
+}
+
+    .digit-buttons button
+    {
+        color: darkblue;
+    }
