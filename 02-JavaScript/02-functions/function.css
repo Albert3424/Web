@@ -30,7 +30,6 @@ input
     width: 32px;
     height: 32px;
     margin: 24px;
-    transition: 3s;
     background-size: 31px 31px; 
 }
 
@@ -47,7 +46,10 @@ img[src='img/sun.png']
 
     .light #switchBackground
     {
+        width: 32px;
+        height: 32px;
         background-image: url("img/moon.png");
+    }
 
 .dark
 {
@@ -57,6 +59,33 @@ img[src='img/sun.png']
 
     .dark #switchBackground
     {
+        width: 32px;
+        height: 32px;
         background-image: url("img/sun.png");
         filter: brightness(0) invert(1);
     }
+
+#photo-container
+{
+    border: solid 1px;
+    width: 400px;
+    height: 300px;
+}
+
+#clock
+{
+    text-align: center;
+    border-top: solid 1px;
+    border-bottom: solid 1px;
+}
+
+    #clock h3
+    {
+        margin: 10px;
+    }
+
+input[type=checkbox]
+{
+    width: 24px;
+    height: 24px;
+}
