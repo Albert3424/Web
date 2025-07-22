@@ -1,16 +1,13 @@
 // JavaScript source code
-function calculatePower()
-{
+function calculatePower() {
 	let base = Number(document.getElementById('base').value);
 	let exponent = Number(document.getElementById('exponent').value);
 	document.getElementById('power').value = Power(base, exponent);
 }
-function Power(base, exponent)
-{
+function Power(base, exponent) {
 	return base ** exponent;
 }
-function SwitchBackground()
-{
+function SwitchBackground() {
 	let switchButton = document.getElementById('switchBackground');
 	let delay = Number(document.getElementById("delay").value);
 	console.log(delay);
@@ -18,16 +15,14 @@ function SwitchBackground()
 	document.getElementById('switchBackground').style.transition = `background-image ${delay}s`;
 	document.body.className = document.body.className === "light" ? "dark" : "light";
 }
-document.addEventListener("mousemove", function (event)
-{
+document.addEventListener("mousemove", function (event) {
 	let x = event.clientX;
 	let y = event.clientY;
 	document.getElementById("mouse").innerHTML = `X = ${x}, Y = ${y}`;
 }
 );
 
-function setImage()
-{
+function setImage() {
 	let filename = document.getElementById("image-file");
 	let reader = new FileReader();
 	reader.onload = function (e) {
@@ -36,8 +31,7 @@ function setImage()
 	reader.readAsDataURL(filename.files[0]);
 }
 
-document.body.onload = function tick_timer()
-{
+document.body.onload = function tick_timer() {
 	let time = new Date();
 	document.getElementById("full-time").innerHTML = time;
 	document.getElementById("hours").innerHTML = addLeadingZero(time.getHours());
@@ -55,48 +49,49 @@ document.body.onload = function tick_timer()
 
 	setTimeout(tick_timer, 100);
 }
-function addLeadingZero(number)
-{
+function addLeadingZero(number) {
 	return number < 10 ? "0" + number : number;
 }
 
-let countdownInterval;
-
-function startCountdown()
-{
-	const targetDateInput = document.getElementById("targetDate");
-	const targetDateValue = targetDateInput.value;
-
-	if (!targetDateValue)
-	{
-		alert("Please select a target date and time");
-		return;
+document.getElementById("btn-start").onclick = function startCountdownTimer() {
+	let targetDate = document.getElementById("target-date");
+	let targetTime = document.getElementById("target-time");
+	let btnStart = document.getElementById("btn-start");
+	targetDate.disabled = targetTime.disabled = !targetDate.disabled;
+	if (btnStart.value === "Start") {
+		btnStart.value = "Stop";
+		tickCountdown();
 	}
+	else {
+		btnStart.value = "Start";
+	}
+}
+function tickCountdown() {
+	if (!document.getElementById("target-time").disabled) return;
+	let now = new Date();
+	console.log(`now timezoneOffset:\t${now.getTimezoneOffset()}`);
 
-	const targetDate = new Date(targetDateValue).getTime();
-	console.log("targetDateValue:", targetDateValue);
-	console.log("targetDate:", targetDate);
-	clearInterval(countdownInterval);
+	let targetDateControl = document.getElementById("target-date");
+	let targetTimeControl = document.getElementById("target-time");
+	let targetDate = targetDateControl.valueAsDate;
+	let targetTime = targetTimeControl.valueAsDate;
 
-	countdownInterval = setInterval(function ()
-	{
-		const now = new Date().getTime();
-		const timeLeft = targetDate - now;
+	targetDate.setHours(targetDate.getHours() + targetDate.getTimezoneOffset() / 60);
+	targetTime.setHours(targetTime.getHours() + targetTime.getTimezoneOffset() / 60);
 
-		if (timeLeft <= 0)
-		{
-			clearInterval(countdownInterval);
-			document.getElementById("countdown").innerHTML = "Countdown Finished!";
-			return;
-		}
-		
-		const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-		const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-		const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-		const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+	targetTime.setFullYear(targetDate.getFullYear());
+	targetTime.setMonth(targetDate.getMonth());
+	targetTime.setDate(targetDate.getDate());
 
-		document.getElementById("countdown").innerHTML =
-			"Time remaining until the set date: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+	let duration = targetTime - now;
+	document.getElementById("duration").innerHTML = duration;
+	let timestamp = Math.trunc(duration / 1000);
+	document.getElementById("timestamp").innerHTML = timestamp;
 
-	}, 1000);
+	document.getElementById("target-date-value").innerHTML = targetDate;
+	document.getElementById("target-time-value").innerHTML = targetTime;
+
+	console.log(`targetTime timezoneOffset:\t${now.getTimezoneOffset()}`);
+
+	setTimeout(tickCountdown, 100);
 }
